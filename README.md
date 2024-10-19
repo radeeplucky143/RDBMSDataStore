@@ -57,7 +57,7 @@ Key-value data store with advanced functionality supporting CRUD operations.
 
 
 
-### Table Schema
+### KeyValue Table Schema
 
 
 | Column Name  | Data Type    | Constraints                                          | Description                                                    |
