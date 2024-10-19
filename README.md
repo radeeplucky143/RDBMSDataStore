@@ -47,12 +47,12 @@ Key-value data store with advanced functionality supporting CRUD operations.
 
 1. **Create a New Role**: After accessing the PostgreSQL prompt, you may want to create a new user role:
    ```sql
-   CREATE ROLE your_username WITH LOGIN PASSWORD 'your_password';
+   CREATE ROLE radeep WITH LOGIN PASSWORD 'ViratKohli#18';
    ```
 
 2. **Create a Database**: You can also create a new database:
    ```sql
-   CREATE DATABASE your_database_name WITH OWNER your_username;
+   CREATE DATABASE DataStore WITH OWNER radeep;
    ```
 
 3. **Adjusting Authentication**: By default, PostgreSQL uses "peer" authentication. You might need to adjust the `pg_hba.conf` file located in `/etc/postgresql/<version>/main/` (Ubuntu) or `/var/lib/pgsql/<version>/data/` (CentOS/RHEL) to set up password authentication.
