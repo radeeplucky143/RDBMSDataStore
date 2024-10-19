@@ -83,7 +83,7 @@ CREATE TABLE key_value_store (
 
     data TEXT NOT NULL,
 
-    ttl INT DEFAULT NULL,
+    ttl INT DEFAULT 7,
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
