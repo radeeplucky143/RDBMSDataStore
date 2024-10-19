@@ -73,7 +73,7 @@ Key-value data store with advanced functionality supporting CRUD operations.
 ### SQL Query for KeyValue Table
 
 ```
-CREATE TABLE key_value_store (
+CREATE TABLE keyvalue (
 
     id SERIAL PRIMARY KEY,
 
