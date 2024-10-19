@@ -70,4 +70,25 @@ Key-value data store with advanced functionality supporting CRUD operations.
 | `created_at` | `TIMESTAMP`  | `DEFAULT CURRENT_TIMESTAMP`                          | Timestamp of when the record was created                       |
 | `expiry_time`| `TIMESTAMP`  | `DEFAULT ADDTIME(CURRENT_TIMESTAMP, INTERVAL 7 DAY)` | Expiry time for the entry, defaults to 7 days after creation   |
 
+### SQL Query for KeyValue Table
+
+```
+CREATE TABLE key_value_store (
+
+    id SERIAL PRIMARY KEY,
+
+    tenant_id VARCHAR(32) NOT NULL,
+
+    key VARCHAR(32) NOT NULL UNIQUE,
+
+    data TEXT NOT NULL,
+
+    ttl INT DEFAULT NULL,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    expiry_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP + INTERVAL '7 days'
+);
+```
+
 
