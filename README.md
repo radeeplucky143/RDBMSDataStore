@@ -1,4 +1,4 @@
-# RedisDataStore
+# RDBMSDataStore
 Key-Value data store with advanced functionality supporting CRUD operations.
 
 | Column Name  | Data Type    | Constraints                                          | Description                                                    |
