@@ -55,15 +55,9 @@ Key-value data store with advanced functionality supporting CRUD operations.
    CREATE DATABASE DataStore WITH OWNER radeep;
    ```
 
-3. **Adjusting Authentication**: By default, PostgreSQL uses "peer" authentication. You might need to adjust the `pg_hba.conf` file located in `/etc/postgresql/<version>/main/` (Ubuntu) or `/var/lib/pgsql/<version>/data/` (CentOS/RHEL) to set up password authentication.
-
-4. **Accessing PostgreSQL Remotely**: If you want to allow remote connections, you'll need to adjust the `postgresql.conf` and `pg_hba.conf` files to allow access and update the firewall settings accordingly.
-
-### Conclusion
-
-After following these steps, you should have a working installation of PostgreSQL on your Linux machine. If you have any specific questions or run into issues, feel free to ask!
 
 
+### Table Schema
 
 
 | Column Name  | Data Type    | Constraints                                          | Description                                                    |
