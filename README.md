@@ -77,9 +77,9 @@ CREATE TABLE keyvalue (
 
     id SERIAL PRIMARY KEY,
 
-    tenant_id VARCHAR(32) NOT NULL UNIQUE,
+    tenant_id VARCHAR(32) NOT NULL,
 
-    key VARCHAR(32) NOT NULL UNIQUE,
+    key VARCHAR(32) NOT NULL,
 
     data TEXT NOT NULL,
 
@@ -88,6 +88,8 @@ CREATE TABLE keyvalue (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     expiry_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP + INTERVAL '7 days'
+
+   UNIQUE (tenant_id, key)
 );
 ```
 
