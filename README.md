@@ -87,7 +87,7 @@ CREATE TABLE keyvalue (
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-    expiry_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP + INTERVAL '7 days'
+    expiry_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP + INTERVAL '7 days',
 
    UNIQUE (tenant_id, key)
 );
