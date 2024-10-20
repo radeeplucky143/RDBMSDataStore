@@ -93,4 +93,68 @@ CREATE TABLE keyvalue (
 );
 ```
 
+# API Endpoints
+
+The API provides endpoints for managing data objects in the key-value store:
+
+### Retrieve Object
+- **GET /object/{key}/{tenant_id}**
+  - Retrieves an object identified by `key` for a specific `tenant_id`.
+  - **Request Parameters:**
+    - `key` (string): The key of the object to retrieve.
+    - `tenant_id` (string): The tenant ID associated with the object.
+  - **Response Codes:**
+    - 200 (OK): Successful retrieval with object data or appropriate message.
+    - 404 (Not Found): Tenant not found or key does not exist.
+    - 502 (Bad Gateway): Internal server error during operation.
+
+### Delete Object
+- **DELETE /object/{key}/{tenant_id}**
+  - Deletes an object identified by `key` for a specific `tenant_id`.
+  - **Request Parameters:**
+    - `key` (string): The key of the object to delete.
+    - `tenant_id` (string): The tenant ID associated with the object.
+  - **Response Codes:**
+    - 200 (OK): Successful deletion with confirmation message.
+    - 404 (Not Found): Tenant not found or key does not exist.
+    - 502 (Bad Gateway): Internal server error during operation.
+
+### Create Object
+- **POST /object**
+  - Creates a new object in the data store.
+  - **Request Body:**
+    - JSON data representing the object (refer to `api.models.PostData`).
+  - **Response Codes:**
+    - 201 (Created): Successful creation with confirmation message.
+    - 409 (Conflict): Record already exists for the provided `tenant_id` and `key`.
+    - 502 (Bad Gateway): Internal server error during operation.
+
+### Batch Create Objects
+- **POST /batch/object**
+  - Creates multiple objects in the data store in a batch.
+  - **Request Body:**
+    - JSON array of objects (refer to `api.models.PostData`).
+  - **Response Codes:**
+    - 200 (OK): Successful creation with details on success, failures, and duplicates.
+    - 502 (Bad Gateway): Internal server error during operation.
+
+# Data Models
+
+The `api.models` module defines data models used in API requests and responses:
+
+### PostData
+- `key` (string): Unique identifier for the object.
+- `tenant_id` (string): Tenant ID associated with the object.
+- `value` (any): The actual data stored for the object.
+- `ttl` (int, optional): Time-to-live (in seconds) for the object.
+
+### GetData (internal)
+- `key` (string): Unique identifier for the object.
+- `tenant_id` (string): Tenant ID associated with the object.
+
+### DeleteData (internal)
+- `key` (string): Unique identifier for the object.
+- `tenant_id` (string): Tenant ID associated with the object.
+
+
 
