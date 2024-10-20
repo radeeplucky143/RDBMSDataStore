@@ -77,7 +77,7 @@ CREATE TABLE keyvalue (
 
     id SERIAL PRIMARY KEY,
 
-    tenant_id VARCHAR(32) NOT NULL,
+    tenant_id VARCHAR(32) NOT NULL UNIQUE,
 
     key VARCHAR(32) NOT NULL UNIQUE,
 
