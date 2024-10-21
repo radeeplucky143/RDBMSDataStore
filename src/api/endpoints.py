@@ -37,11 +37,12 @@ async def get_object(key: str, tenant_id: str):
 async def post_object(object: PostData):
     try:
         datastore = DataStore()
-        if datastore.PostData(object):
+        status = datastore.PostData(object)
+        if status == True:
             datastore.disconnect()
             return JSONResponse(status_code=201, content={'message': f'Dear {object.tenant_id}, Record: {object} insertion Successful.'})
         datastore.disconnect()
-        return JSONResponse(status_code=503, content={'message': f'Dear {object.tenant_id}, Record already exists in database.'})
+        return JSONResponse(status_code=409, content={'message': f'Dear {object.tenant_id}, {status}'})
     except Exception as err:
         datastore.disconnect()
         return JSONResponse(status_code=502, content={'error': str(err)})
@@ -52,18 +53,19 @@ async def post_objects(objects: list[PostData]):
     try:
         success = []
         failures = []
-        duplicates = []
+        exceptions = []
         datastore = DataStore()
         for object in objects:
             try:
-                if datastore.PostData(object):
+                status = datastore.PostData(object)
+                if status == True:
                     success.append(f'Dear {object.tenant_id}, Record: {object} insertion Successful.')
                 else:
-                    duplicates.append(f'Dear {object.tenant_id}, Record: {object} already exists in database.')
+                    failures.append(f'Dear {object.tenant_id}, {status}')
             except Exception as err:
-                failures.append(f'Error while inserting the record {object}')
+                exceptions.append(f'Error while inserting the record {object}')
         datastore.disconnect()
-        return JSONResponse(status_code=200, content={'success': success, 'failures': failures, 'duplicates': duplicates})
+        return JSONResponse(status_code=200, content={'success': success, 'failures': failures, 'exceptions': exceptions})
     except Exception as err:
         return JSONResponse(status_code=502, content={'error': str(err)})
 
@@ -77,7 +79,7 @@ async def delete_object(key: str, tenant_id: str):
             datastore.disconnect()
             return JSONResponse(status_code=200, content={'message': f'Dear {tenant_id},{data}'})
         datastore.disconnect()
-        return JSONResponse(status_code=200, content={'message': f'Dear {tenant_id}, you were not registered/exists in the database.'})
+        return JSONResponse(status_code=404, content={'message': f'Dear {tenant_id}, you were not registered/exists in the database.'})
     except Exception as err:
         return JSONResponse(status_code=502, content={'error': err})
 

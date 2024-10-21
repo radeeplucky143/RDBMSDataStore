@@ -1,6 +1,7 @@
 from core.PostgreConnection import PostgreSQLConnection
 from api.models import PostData, GetData, DeleteData
 from psycopg2 import Error, OperationalError
+from api.config import storage_limit
 
 
 class DataStore:
@@ -117,11 +118,14 @@ class DataStore:
         """
         try:
             if not self.RecordExists(object.tenant_id, object.key):
-                sql = f"INSERT INTO {self.table_name} (tenant_id, key, data, expiry_time) VALUES (%s, %s, %s, CURRENT_TIMESTAMP + INTERVAL '%s days')"
-                self.cursor.execute(sql, (object.tenant_id, object.key, object.data, object.ttl))
-                self.database.commit()
-                return True
-            return False
+                storage = self.TenantStorage(object.tenant_id)
+                if storage + len(object.data) <= storage_limit:
+                    sql = f"INSERT INTO {self.table_name} (tenant_id, key, data, size, expiry_time) VALUES (%s, %s, %s, %s, CURRENT_TIMESTAMP + INTERVAL '%s days')"
+                    self.cursor.execute(sql, (object.tenant_id, object.key, object.data, len(object.data), object.ttl))
+                    self.database.commit()
+                    return True
+                return f"Storage limit exceeded. Maximum Storage: {storage_limit}, UsedStorage: {storage}, Available: {storage_limit-storage}, dataSize: {len(object.data)} "
+            return f"Record {object} already exists in the database"
         except OperationalError as e:
             print(f"Error connecting to database: {e}")
             raise Exception(e)
