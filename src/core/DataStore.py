@@ -12,6 +12,18 @@ class DataStore:
         self.table_name = "keyvalue"
 
 
+    def TenantStorage(self, tenant_id: str):
+        """Retrieving tenant storage details"""
+        try:
+            sql = f"SELECT SUM(size) FROM {self.table_name} WHERE tenant_id='{tenant_id}'"
+            self.cursor.execute(sql)
+            results = self.cursor.fetchall()[0][0]
+            return results if results else 0
+        except Error as e:
+            print(f"Error retrieving data: {e}")
+            raise Exception(e)
+
+
     def tenantExists(self, tenant_id: str):
         """Checking whether tenant exists in the database."""
         try:

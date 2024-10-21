@@ -20,15 +20,15 @@ async def get_object(key: str, tenant_id: str):
                     "tenant_id": data[1],
                     "key": data[2],
                     "value": data[3],
-                    "ttl": data[4],
-                    "creation_time": data[5].isoformat(),
-                    "expiry_time": data[6].isoformat()
+                    "size": data[4],
+                    "ttl": data[5],
+                    "creation_time": data[6].isoformat(),
+                    "expiry_time": data[7].isoformat()
                 }
                 return JSONResponse(status_code=200, content=response_data)
-            message = f'Dear {tenant_id},please add Key {key} before requesting.'
-            return JSONResponse(status_code=200, content={'message': message})
+            return JSONResponse(status_code=404, content={'message': f'Dear {tenant_id},please add Key {key} before requesting.'})
         datastore.disconnect()
-        return JSONResponse(status_code=200, content={'message': f'Dear {tenant_id}, you were not registered/exists in the database.'})
+        return JSONResponse(status_code=404, content={'message': f'Dear {tenant_id}, you were not registered/exists in the database.'})
     except Exception as err:
         return JSONResponse(status_code=502,content={'error': err})
 
