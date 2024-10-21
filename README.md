@@ -55,6 +55,30 @@ Key-value data store with advanced functionality supporting CRUD operations.
    CREATE DATABASE DataStore WITH OWNER radeep;
    ```
 
+# Flyway Migration Guide
+
+This guide outlines the general steps to apply database migrations using Flyway.
+
+## Steps to Apply Migrations using Flyway
+
+1. **Install Flyway**  
+   Download and install Flyway for your operating system. You can find the official downloads and installation instructions [here](https://flywaydb.org/documentation/getstarted/install).
+
+2. **Configure Flyway**  
+   Create a Flyway configuration file (usually named `flyway.conf`) that specifies the database connection details and other settings. An example configuration might look like this:
+   
+   ```ini
+   flyway.url=jdbc:mysql://localhost:3306/your_database
+   flyway.user=your_username
+   flyway.password=your_password
+   flyway.schemas=public
+   ```
+3. Run Flyway
+   Execute the Flyway command to apply the migrations. For example, to run the migrations, use the following command:
+   ``` flwaway migrate```
+
+
+
 
 
 ### KeyValue Table Schema
