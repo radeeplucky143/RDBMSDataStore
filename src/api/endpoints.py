@@ -67,7 +67,7 @@ async def post_objects(objects: list[PostData]):
         datastore.disconnect()
         return JSONResponse(status_code=200, content={'success': success, 'failures': failures, 'exceptions': exceptions})
     except Exception as err:
-        return JSONResponse(status_code=502, content={'error': str(err)})
+        return JSONResponse(status_code=502, content={'error': str(err), 'success': success, 'failures': failures, 'exceptions': exceptions})
 
 
 @router.delete("/object/{key}/{tenant_id}")
