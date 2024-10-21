@@ -66,7 +66,7 @@ This guide outlines the general steps to apply database migrations using Flyway.
 
 2. **Configure Flyway**  
    Create a Flyway configuration file (usually named `flyway.conf`) that specifies the database connection details and other settings. An example configuration might look like this:
-   
+
    ```ini
    flyway.url=jdbc:mysql://localhost:3306/your_database
    flyway.user=your_username
@@ -184,4 +184,4 @@ The `api.models` module defines data models used in API requests and responses:
 - `tenant_id` (string): Tenant ID associated with the object.
 
 
-
+![API Endpoints](src/images/Screenshot 2024-10-21 3.11.21 PM.png)
