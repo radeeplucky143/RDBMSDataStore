@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import JSONResponse
-from core.DataStore import DataStore
-from api.models import PostData, GetData, DeleteData
+from src.core.DataStore import DataStore
+from src.api.models import PostData, GetData, DeleteData
 import asyncio
 
 router = APIRouter()

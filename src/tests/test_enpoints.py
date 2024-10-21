@@ -1,7 +1,7 @@
 import pytest
 from fastapi.testclient import TestClient
 from unittest.mock import patch, MagicMock
-from api.endpoints import router
+from src.api.endpoints import router
 
 client = TestClient(router)
 
@@ -15,11 +15,11 @@ mock_data = {
 }
 
 
-@patch("core.DataStore")
+@patch("src.core.DataStore")
 def test_get_object(mock_datastore):
     mock_instance = mock_datastore.return_value
     mock_instance.tenantExists.return_value = True
-    mock_instance.getKey.return_value = [(1, "tenant123", "test_key", "test_value", 3600, mock_data["creation_time"], mock_data["expiry_time"])]
+    mock_instance.getKey.return_value = [(1, "tenant123", "test_key", "test_value", 10, 3600, mock_data["creation_time"], mock_data["expiry_time"])]
 
     response = client.get("/object/test_key/tenant123")
 
@@ -28,6 +28,7 @@ def test_get_object(mock_datastore):
         "tenant_id": "tenant123",
         "key": "test_key",
         "value": "test_value",
+        "size": 10,
         "ttl": 3600,
         "creation_time": "2024-10-19T12:34:56",
         "expiry_time": "2024-10-20T12:34:56"
@@ -35,7 +36,7 @@ def test_get_object(mock_datastore):
     mock_instance.disconnect.assert_called_once()
 
 
-@patch("core.DataStore")
+@patch("src.core.DataStore")
 def test_post_object(mock_datastore):
     mock_instance = mock_datastore.return_value
     mock_instance.PostData.return_value = True

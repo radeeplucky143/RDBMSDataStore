@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, validator
-from api.config import default_ttl
+from src.api.config import default_ttl
 from typing import Any
 
 class PostData(BaseModel):
