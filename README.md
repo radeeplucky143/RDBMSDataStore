@@ -184,4 +184,10 @@ The `api.models` module defines data models used in API requests and responses:
 - `tenant_id` (string): Tenant ID associated with the object.
 
 
-![API Endpoints](src/images/Screenshot 2024-10-21 3.11.21 PM.png)
+### Running the FastAPI 
+
+Running the below command from directory: RDBMSDataStore/src 
+
+```
+ python3 main.py
+```
