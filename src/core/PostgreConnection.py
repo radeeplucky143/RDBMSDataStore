@@ -1,7 +1,7 @@
 import psycopg2
 from psycopg2 import Error
-from src.api.config import postgre_host, postgre_database, postgre_user, postgre_password
-from src.core.SQLConnection import SQLConnection
+from api.config import postgre_host, postgre_database, postgre_user, postgre_password
+from core.SQLConnection import SQLConnection
 
 class PostgreSQLConnection(SQLConnection):
     """ Single Responsibility Principle: establishes connection to PostgreSQL Database and execute queries"""

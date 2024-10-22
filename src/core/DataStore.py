@@ -1,7 +1,7 @@
-from src.core.PostgreConnection import PostgreSQLConnection
-from src.api.models import PostData, GetData, DeleteData
+from core.PostgreConnection import PostgreSQLConnection
+from api.models import PostData, GetData, DeleteData
 from psycopg2 import Error, OperationalError
-from src.api.config import storage_limit
+from api.config import storage_limit
 
 
 class DataStore:
