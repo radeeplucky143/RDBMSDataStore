@@ -2,13 +2,12 @@ from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import JSONResponse
 from core.DataStore import DataStore
 from api.models import PostData, GetData, DeleteData
-import asyncio
 
 router = APIRouter()
 
 
 @router.get("/object/{key}/{tenant_id}")
-async def get_object(key: str, tenant_id: str):
+def get_object(key: str, tenant_id: str):
     try:
         datastore = DataStore()
         if datastore.tenantExists(tenant_id):
@@ -34,7 +33,7 @@ async def get_object(key: str, tenant_id: str):
 
 
 @router.post("/object")
-async def post_object(object: PostData):
+def post_object(object: PostData):
     try:
         datastore = DataStore()
         status = datastore.PostData(object)
@@ -49,7 +48,7 @@ async def post_object(object: PostData):
 
 
 @router.post("/batch/object")
-async def post_objects(objects: list[PostData]):
+def post_objects(objects: list[PostData]):
     try:
         success = []
         failures = []
@@ -71,7 +70,7 @@ async def post_objects(objects: list[PostData]):
 
 
 @router.delete("/object/{key}/{tenant_id}")
-async def delete_object(key: str, tenant_id: str):
+def delete_object(key: str, tenant_id: str):
     try:
         datastore = DataStore()
         if datastore.tenantExists(tenant_id):
@@ -85,7 +84,7 @@ async def delete_object(key: str, tenant_id: str):
 
 
 @router.delete("/delete/expired")
-async def delete_expired():
+def delete_expired():
     try:
         datastore = DataStore()
         response = datastore.deleteExpired()
