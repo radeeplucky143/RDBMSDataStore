@@ -36,11 +36,29 @@ def test_get_object_user_not_found(mock_data_store):
     """User Not found case check"""
 
     key = "movie"
-    tenant_id = "radeep"
+    tenant_id = "shyam"
     expected_data = {'message': f'Dear {tenant_id}, you were not registered/exists in the database.'}
 
 
     mock_data_store.return_value.tenantExists.return_value = False
+    mock_data_store.return_value.disconnect.return_value = None
+
+    response = client.get(f"/api/object/{key}/{tenant_id}")
+
+    assert response.status_code == 404
+    assert response.json() == expected_data
+
+
+@patch('api.endpoints.DataStore')
+def test_get_object_record_not_found(mock_data_store):
+    """User Not found case check"""
+
+    key = "sample"
+    tenant_id = "radeep"
+    expected_data = {'message': f'Dear {tenant_id},please add Key {key} before requesting.'}
+
+    mock_data_store.return_value.tenantExists.return_value = True
+    mock_data_store.return_value.getKey.return_value = []
     mock_data_store.return_value.disconnect.return_value = None
 
     response = client.get(f"/api/object/{key}/{tenant_id}")
