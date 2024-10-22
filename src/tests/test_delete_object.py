@@ -78,3 +78,41 @@ def test_delete_object_Exception(mock_data_store):
 
     assert response.status_code == 502
     assert response.json() == expected_data
+
+
+@patch('api.endpoints.DataStore')
+def test_delete_expired_Exception(mock_data_store):
+    """Unexpected exception case"""
+
+    expected_data = {"error":"error occured"}
+    mock_data_store.return_value.deleteExpired.side_effect = Exception("error occured")
+    response = client.delete(f"/api/delete/expired")
+
+    assert response.status_code == 502
+    assert response.json() == expected_data
+
+
+@patch('api.endpoints.DataStore')
+def test_delete_expired_no_record_found(mock_data_store):
+    """NO records found."""
+
+    expected_data = {"message": "No expired records found.."}
+    mock_data_store.return_value.deleteExpired.return_value = "No expired records found.."
+    mock_data_store.return_value.disconnect.return_value = None
+    response = client.delete(f"/api/delete/expired")
+
+    assert response.status_code == 200
+    assert response.json() == expected_data
+
+
+@patch('api.endpoints.DataStore')
+def test_delete_expired_records_deleted(mock_data_store):
+    """Records deleted."""
+
+    expected_data = {"message": f"Total no of expiry records: 9"}
+    mock_data_store.return_value.deleteExpired.return_value = f"Total no of expiry records: 9"
+    mock_data_store.return_value.disconnect.return_value = None
+    response = client.delete(f"/api/delete/expired")
+
+    assert response.status_code == 200
+    assert response.json() == expected_data
