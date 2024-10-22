@@ -81,10 +81,8 @@ class DataStore:
             results = self.cursor.rowcount
             if results > 0:
                 self.database.commit()
-                print("Record deleted successfully")
-                return "Record deleted successfully."
-            print("Please make sure record exists in the database before performing delete operation..")
-            return "Please make sure record exists in the database before performing delete operation.."
+                return f"Record {object} deleted successfully."
+            return f"Please make sure Record {object} exists in the database before performing delete operation.."
         except Error as e:
             print(f"Error deleting data: {e}")
             raise Exception(e)
