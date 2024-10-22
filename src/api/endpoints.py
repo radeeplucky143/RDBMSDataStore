@@ -29,7 +29,7 @@ def get_object(key: str, tenant_id: str):
         datastore.disconnect()
         return JSONResponse(status_code=404, content={'message': f'Dear {tenant_id}, you were not registered/exists in the database.'})
     except Exception as err:
-        return JSONResponse(status_code=502,content={'error': err})
+        return JSONResponse(status_code=502,content={'error': str(err)})
 
 
 @router.post("/object")
@@ -80,7 +80,7 @@ def delete_object(key: str, tenant_id: str):
         datastore.disconnect()
         return JSONResponse(status_code=404, content={'message': f'Dear {tenant_id}, you were not registered/exists in the database.'})
     except Exception as err:
-        return JSONResponse(status_code=502, content={'error': err})
+        return JSONResponse(status_code=502, content={'error': str(err)})
 
 
 @router.delete("/delete/expired")
