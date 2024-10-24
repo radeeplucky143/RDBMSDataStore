@@ -99,9 +99,18 @@ PostgreSQL provides native migration tools(`pg_dump` and `pg_restore`)
 | `created_at` | `TIMESTAMP`  | `DEFAULT CURRENT_TIMESTAMP`                          | Timestamp of when the record was created                       |
 | `expiry_time`| `TIMESTAMP`  | `DEFAULT ADDTIME(CURRENT_TIMESTAMP, INTERVAL 7 DAY)` | Expiry time for the entry, defaults to 7 days after creation   |
 
+
+### SQL Query for Roles Table
+```SQL
+CREATE TABLE roles (
+    role_id SERIAL PRIMARY KEY, 
+    role_name VARCHAR(100) NOT NULL UNIQUE
+);
+```
+
 ### SQL Query for KeyValue Table
 
-```
+```SQL
 CREATE TABLE keyvalue (
 
     id SERIAL PRIMARY KEY,
