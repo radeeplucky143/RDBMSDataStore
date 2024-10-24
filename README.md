@@ -116,12 +116,24 @@ CREATE TABLE tiers (
 );
 ```
 
+### SQL Table for Users Table
+
+```SQL
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    tenant_id VARCHAR(32) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL,
+    tier_level INTEGER REFERENCES tiers(tier_level),
+    role_name VARCHAR(100) REFERENCES roles(role_name)
+);
+```
+
 ### SQL Query for KeyValue Table
 
 ```SQL
 CREATE TABLE keyvalue (
     id SERIAL PRIMARY KEY,
-    tenant_id VARCHAR(32) NOT NULL,
+    tenant_id VARCHAR(32) NOT NULL REFERENCES users(tenant_id),
     key VARCHAR(32) NOT NULL,
     data TEXT NOT NULL,
     size INT NOT NULL,
