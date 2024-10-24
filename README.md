@@ -47,44 +47,42 @@ Advanced Key-value DataStore supports CRUD operations and provides different sto
 
 7. **Exit PostgreSQL Prompt**:
    To exit the prompt, type:
-   ```sql
+   ```SQL
    \q
    ```
 
 ### Post-Installation Steps
 
 1. **Create a New Role**: After accessing the PostgreSQL prompt, you may want to create a new user role:
-   ```sql
+   ```SQL
    CREATE ROLE radeep WITH LOGIN PASSWORD 'ViratKohli#18';
    ```
 
 2. **Create a Database**: You can also create a new database:
-   ```sql
+   ```SQL
    CREATE DATABASE DataStore WITH OWNER radeep;
    ```
 
-# Flyway Migration Guide
+# Data Migration Guide.
 
-This guide outlines the general steps to apply database migrations using Flyway.
+PostgreSQL provides native migration tools(`pg_dump` and `pg_restore`)
 
-## Steps to Apply Migrations using Flyway
+1. **Exporting the database using `pg_dump`**:
 
-1. **Install Flyway**  
-   Download and install Flyway for your operating system. You can find the official downloads and installation instructions [here](https://flywaydb.org/documentation/getstarted/install).
+   The below command asks for the password, it creates the .sql file in the current working directory or path mentioned in the command
+      ```
+      pg_dump -U user_name -d database_name -h localhost > {path}/file_name.sql
+      ```
 
-2. **Configure Flyway**  
-   Create a Flyway configuration file (usually named `flyway.conf`) that specifies the database connection details and other settings. An example configuration might look like this:
+3. **Importing the database using `psql` or   `pg_restore`**:
 
-   ```ini
-   flyway.url=jdbc:mysql://localhost:3306/your_database
-   flyway.user=your_username
-   flyway.password=your_password
-   flyway.schemas=public
+   `psql`: binary format restoration
+
+   `pg_restore`: SQL format restoration
+
    ```
-3. Run Flyway
-   Execute the Flyway command to apply the migrations. For example, to run the migrations, use the following command:
-   ``` flwaway migrate```
-
+   psql -U remote_user_name -d remote_database_name -h remote_host -f file_name.sql
+   ```
 
 
 
