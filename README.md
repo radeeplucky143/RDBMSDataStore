@@ -109,7 +109,7 @@ CREATE TABLE roles (
 ```
 
 ### SQL Query for Tiers Table
-```
+```SQL
 CREATE TABLE tiers (
     tier_level INTEGER PRIMARY KEY,
     storage_limit INTEGER
