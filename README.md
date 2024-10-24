@@ -63,7 +63,7 @@ Advanced Key-value DataStore supports CRUD operations and provides different sto
    CREATE DATABASE DataStore WITH OWNER radeep;
    ```
 
-# Data Migration Guide.
+## Data Migration Guide.
 
 PostgreSQL provides native migration tools(`pg_dump` and `pg_restore`)
 
@@ -83,22 +83,7 @@ PostgreSQL provides native migration tools(`pg_dump` and `pg_restore`)
    ```
 
 
-
-
-### KeyValue Table Schema
-
-
-| Column Name  | Data Type    | Constraints                                          | Description                                                    |
-|--------------|--------------|------------------------------------------------------|----------------------------------------------------------------|
-| `id`         | `INT`        | `AUTO_INCREMENT PRIMARY KEY`                         | Unique identifier for each record                              |
-| `tenant_id`  | `VARCHAR(32)`| `NOT NULL`                                           | Identifier for the tenant                                      |
-| `key`        | `VARCHAR(32)`| `NOT NULL UNIQUE`                                    | Unique key for the data                                        |
-| `data`       | `TEXT`       | `NOT NULL`                                           | Value associated with the key                                  |
-| `size`       | `INT`        | `NOT NULL`                                           | size of the data stored                                        |
-| `ttl`        | `INT`        | `DEFAULT NULL`                                       | Time-to-live for the key-value pair (in seconds)               |
-| `created_at` | `TIMESTAMP`  | `DEFAULT CURRENT_TIMESTAMP`                          | Timestamp of when the record was created                       |
-| `expiry_time`| `TIMESTAMP`  | `DEFAULT ADDTIME(CURRENT_TIMESTAMP, INTERVAL 7 DAY)` | Expiry time for the entry, defaults to 7 days after creation   |
-
+## Database Design
 
 ### SQL Query for Roles Table
 ```SQL
@@ -143,6 +128,20 @@ CREATE TABLE keyvalue (
    UNIQUE (tenant_id, key)
 );
 ```
+
+### KeyValue Table Schema
+
+
+| Column Name  | Data Type    | Constraints                                          | Description                                                    |
+|--------------|--------------|------------------------------------------------------|----------------------------------------------------------------|
+| `id`         | `INT`        | `AUTO_INCREMENT PRIMARY KEY`                         | Unique identifier for each record                              |
+| `tenant_id`  | `VARCHAR(32)`| `NOT NULL`                                           | Identifier for the tenant                                      |
+| `key`        | `VARCHAR(32)`| `NOT NULL UNIQUE`                                    | Unique key for the data                                        |
+| `data`       | `TEXT`       | `NOT NULL`                                           | Value associated with the key                                  |
+| `size`       | `INT`        | `NOT NULL`                                           | size of the data stored                                        |
+| `ttl`        | `INT`        | `DEFAULT NULL`                                       | Time-to-live for the key-value pair (in seconds)               |
+| `created_at` | `TIMESTAMP`  | `DEFAULT CURRENT_TIMESTAMP`                          | Timestamp of when the record was created                       |
+| `expiry_time`| `TIMESTAMP`  | `DEFAULT ADDTIME(CURRENT_TIMESTAMP, INTERVAL 7 DAY)` | Expiry time for the entry, defaults to 7 days after creation   |
 
 # API Endpoints
 
