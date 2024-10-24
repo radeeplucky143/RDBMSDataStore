@@ -108,27 +108,26 @@ CREATE TABLE roles (
 );
 ```
 
+### SQL Query for Tiers Table
+```
+CREATE TABLE tiers (
+    tier_level INTEGER PRIMARY KEY,
+    storage_limit INTEGER
+);
+```
+
 ### SQL Query for KeyValue Table
 
 ```SQL
 CREATE TABLE keyvalue (
-
     id SERIAL PRIMARY KEY,
-
     tenant_id VARCHAR(32) NOT NULL,
-
     key VARCHAR(32) NOT NULL,
-
     data TEXT NOT NULL,
-
     size INT NOT NULL,
-
     ttl INT DEFAULT 7,
-
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
     expiry_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP + INTERVAL '7 days',
-
    UNIQUE (tenant_id, key)
 );
 ```
