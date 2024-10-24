@@ -76,9 +76,7 @@ PostgreSQL provides native migration tools(`pg_dump` and `pg_restore`)
 
 3. **Importing the database using `psql` or   `pg_restore`**:
 
-   `psql`: binary format restoration
-
-   `pg_restore`: SQL format restoration
+   The below command asks for the password, download the filename.sql from the remote host and it will replicate the same SQL relation setup in your remote_database_name
 
    ```
    psql -U remote_user_name -d remote_database_name -h remote_host -f file_name.sql
