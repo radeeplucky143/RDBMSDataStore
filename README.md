@@ -1,6 +1,12 @@
 # RDBMSDataStore
+![PostgreSQL](https://img.shields.io/badge/Postgres-v16.0-green.svg)
 ![Python](https://img.shields.io/badge/python-v3.10-blue.svg)
-![PostgreSQL](https://img.shields.io/badge/postgres-v16.0-green.svg)
+![Uvicorn](https://img.shields.io/badge/uvicorn-v0.17.6-red.svg)
+![Fastapi](https://img.shields.io/badge/fastApi-v0.95.0-violet.svg)
+![Pydantic](https://img.shields.io/badge/pydantic-v1.10.7-orange.svg)
+![psycopg2](https://img.shields.io/badge/psycopg2-v2.9.7-pink.svg)
+![pytest](https://img.shields.io/badge/pytest-v7.4.2-violet.svg)
+<br>
 Key-value data store with advanced functionality supporting CRUD operations.
 
 
