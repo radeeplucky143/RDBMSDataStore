@@ -7,7 +7,7 @@
 ![psycopg2](https://img.shields.io/badge/psycopg2-v2.9.7-pink.svg)
 ![pytest](https://img.shields.io/badge/pytest-v7.4.2-violet.svg)
 <br>
-Key-value DataStore with advanced functionality supporting CRUD operations and providing Different level of storage for different tier users.
+Advanced Key-value DataStore supports CRUD operations and provides different storage levels for users of various tiers.
 
 
 
