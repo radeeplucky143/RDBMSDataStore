@@ -1,4 +1,6 @@
 # RDBMSDataStore
+![Python](https://img.shields.io/badge/python-v3.10-blue.svg)
+![PostgreSQL](https://img.shields.io/badge/postgres-v16.0-green.svg)
 Key-value data store with advanced functionality supporting CRUD operations.
 
 
@@ -198,3 +200,5 @@ Running the below command from directory: RDBMSDataStore/src
 
 ### Unit test cases coverage
 ![Test Cases Coverage](src/images/coverage.png)
+
+
